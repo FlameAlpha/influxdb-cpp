@@ -23,14 +23,16 @@ __Dependencies:__
 
 ## Quick start
 
-### write
+### Write
 
 ```cpp
 // Provide complete URI
-auto influxdb = influxdb::InfluxDBFactory::Get("http://localhost:8086/?db=test");
-influxdb->write(Point{"test"}
-  .addField("value", 10)
-  .addTag("host", "localhost")
+auto influxdb = influxdb::InfluxDBFactory::Get("http://admin:admin@localhost:8086/?db=mydb");
+influxdb->write(influxdb::Point{ "cpu" }
+    .addTag("host", "localhost")
+    .addTag("region", "china")
+    .addField("north_latitude", 36)
+    .addField("east_longitude", 114)
 );
 ```
 
@@ -41,7 +43,11 @@ influxdb->write(Point{"test"}
 // Available over HTTP only
 auto influxdb = influxdb::InfluxDBFactory::Get("http://localhost:8086/?db=test");
 /// Pass an IFQL to get list of points
-std::vector<Point> points = idb->query("SELECT * FROM test");
+auto points = influxdb->query("SELECT * FROM cpu");
+std::cout << "query over!" << std::endl;
+std::cout << "name : " << points.back().getName() <<std::endl
+            << "field : "<<points.back().getFields() << std::endl
+            << "timestamp : " << points.back().getTimestamp().time_since_epoch().count()  << std::endl;
 ```
 
 ## Transports
