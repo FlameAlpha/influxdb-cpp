@@ -49,6 +49,14 @@ std::cout << "name : " << points.back().getName() <<std::endl
             << "field : "<<points.back().getFields() << std::endl
             << "timestamp : " << points.back().getTimestamp().time_since_epoch().count()  << std::endl;
 ```
+## Libary
+```
+libcurl.lib
+libboost_regex-vc141-mt-x64-1_67.lib
+libboost_system-vc141-mt-x64-1_67.lib
+libboost_date_time-vc141-mt-x64-1_67.lib
+```
+All of them were placed in the `./lib` folder.
 
 ## Transports
 
