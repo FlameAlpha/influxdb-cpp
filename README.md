@@ -1,8 +1,6 @@
 # influxdb-cxx
 
-[![Build Status](https://travis-ci.com/awegrzyn/influxdb-cxx.svg?branch=master)](https://travis-ci.com/awegrzyn/influxdb-cxx)
-[![codecov](https://codecov.io/gh/awegrzyn/influxdb-cxx/branch/master/graph/badge.svg)](https://codecov.io/gh/awegrzyn/influxdb-cxx)
-
+It is forked from [awegrzyn/influxdb-cxx](https://github.com/awegrzyn/influxdb-cxx), and I also modified some bug (about time and query) in this project, and transplant it to QT project
 
 InfluxDB C++ client library
  - Writing points
@@ -10,30 +8,22 @@ InfluxDB C++ client library
  - Data exploration
  - Supported transports
    - HTTP/HTTPS with Basic Auth
-   - UDP
-   - Unix datagram socket
 
 
  ### Installation
 
  __Build requirements:__
- g++ 6.0+, CMake 3.12+
+Qt 5.12.2 MSVC2017 64bit 
+
+__Integrated development environment:__
+Qt Creator 4.8.2
 
 __Dependencies:__
- cURL, boost 1.57+ (optional)
-
- __Compilation__
- ```bash
-git clone https://github.com/awegrzyn/influxdb-cxx.git
-cd influxdb-cxx; mkdir build
-cd build
-cmake ..
-sudo make install
- ```
+ cURL, boost 1.57+ 
 
 ## Quick start
 
-### Basic write
+### write
 
 ```cpp
 // Provide complete URI
@@ -44,18 +34,6 @@ influxdb->write(Point{"test"}
 );
 ```
 
-### Batch write
-
-```cpp
-// Provide complete URI
-auto influxdb = influxdb::InfluxDBFactory::Get("http://localhost:8086/?db=test");
-// Write batches of 100 points
-influxdb->batchOf(100);
-
-for (;;) {
-  influxdb->write(Point{"test"}.addField("value", 10));
-}
-```
 
 ### Query
 
@@ -78,5 +56,3 @@ List of supported transport is following:
 | Name        | Dependency  | URI protocol   | Sample URI                            |
 | ----------- |:-----------:|:--------------:| -------------------------------------:|
 | HTTP        | cURL        | `http`/`https` | `http://localhost:8086/?db=<db>`      |
-| UDP         | boost       | `udp`          | `udp://localhost:8094`                |
-| Unix socket | boost       | `unix`         | `unix:///tmp/telegraf.sock`           |
