@@ -1,4 +1,4 @@
-# influxdb-cxx
+# influxdb-cpp
 
 It is forked from [awegrzyn/influxdb-cxx](https://github.com/awegrzyn/influxdb-cxx), and I also modified some bug (about time and query) in this project, and transplant it to QT project
 
